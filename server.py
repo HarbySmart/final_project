@@ -12,12 +12,13 @@ app = Flask("Emotion Detector")
 def emo_detector():
     text_to_analyse = request.args.get('textToAnalyze')
     response = emotion_detector(text_to_analyse)
-    emotion = response['emotionPredictions'][0]['emotion']
-    dominant_emotion = max(emotion.items(), key=lambda x: x[1])
-
-    return "For the given statement, the system response is {emotion}. The dominant emotion is {dominant_emotion}"
+    
+    return response
 
 @app.route("/")
 def render_index_page():
     return render_template('index.html')
+
+if __name__ == "__main__":
+    app.run(host = "0.0.0.0", port = 5000)
     
